@@ -2,14 +2,14 @@
 Author: Dong Jiajun 2070928523@qq.com
 Date: 2023-03-29 01:35:35
 LastEditors: Dong Jiajun 2070928523@qq.com
-LastEditTime: 2023-03-30 02:12:02
+LastEditTime: 2023-03-30 02:54:49
 FilePath: \ColorTool\main.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
 # This Python file uses the following encoding: utf-8
 import sys
 
-from PySide2.QtWidgets import QMainWindow, QDialog, QApplication, QGraphicsScene, QGraphicsPixmapItem, QGraphicsItem
+from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsScene, QGraphicsPixmapItem, QGraphicsItem
 from PySide2.QtCore import QFile
 from PySide2.QtUiTools import QUiLoader
 from PySide2 import QtCore
@@ -86,7 +86,7 @@ class Window(QMainWindow):
         self.colortool.color_num = num
         
     def sorttypeset(self, type):
-        if type == '深浅':
+        if type == '亮度':
             t = 1
         elif type == '权重':
             t = 2
@@ -146,13 +146,6 @@ class Window(QMainWindow):
         for k in ls:
             cpath = os.path.join(path, k)
             os.remove(cpath)
-            
-        for i in range(len(self.imgs)):
-            img = cv2.cvtColor(self.imgs[i], cv2.COLOR_RGB2BGR)
-            name = 'rgb'+str(self.colortool.color_list[i][0]) + '_'\
-                + str(self.colortool.color_list[i][1]) + '_'\
-                    + str(self.colortool.color_list[i][2])
-            cv2.imwrite("./imgs/"+name+".png", img) # 只能写BGR格式
         
         # TODO: 将图片连成一排打印出来，格式可自定义
         colorlist = self.colortool.color_list
@@ -165,6 +158,10 @@ class Window(QMainWindow):
             color = tuple([int(x) for x in color]) # 转int元组防报错
             cv2.rectangle(singleimg, (0,0), (w, h), color, -1)
             singleimg = cv2.cvtColor(singleimg, cv2.COLOR_RGB2BGR)
+            name = 'rgb_'+str(self.colortool.color_list[i][0]) + '_'\
+                + str(self.colortool.color_list[i][1]) + '_'\
+                    + str(self.colortool.color_list[i][2])
+            cv2.imwrite("./imgs/"+name+".png", singleimg) # 只能写BGR格式
             
             if i==0:
                 totalimg = singleimg
@@ -176,7 +173,6 @@ class Window(QMainWindow):
                 continue
             totalimg = np.hstack((totalimg, spanimg))
 
-        print(totalimg)
         cv2.imwrite("./imgs/atla.png", totalimg)
                 
         
