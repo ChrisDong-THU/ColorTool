@@ -2,16 +2,9 @@
 Author: Dong Jiajun 2070928523@qq.com
 Date: 2023-03-29 01:35:35
 LastEditors: Dong Jiajun 2070928523@qq.com
-LastEditTime: 2023-03-29 15:22:32
+LastEditTime: 2023-03-29 18:28:17
 FilePath: \ColorTool\main.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-'''
-'''
-Author: Dong Jiajun 2070928523@qq.com
-Date: 2023-03-28 18:57:58
-LastEditors: Dong Jiajun 2070928523@qq.com
-LastEditTime: 2023-03-29 15:02:37
-FilePath: \ColorTool\main.py
 '''
 # This Python file uses the following encoding: utf-8
 import sys
@@ -32,16 +25,17 @@ import numpy as np
 
 
 class Window(QMainWindow):
-    BLOCKS_X = 400
+    BLOCKS_X = 500
     BLOCKS_Y = 30
-    BLOCK_H = 32
-    BLOCK_W = 100
-    BLOCK_D = 45 # 色块间距
+    BLOCK_H = 52
+    BLOCK_W = 52
+    BLOCK_VD = 152 # 色块水平方向间距
+    BLOCK_HD = 72 # 色块竖直方向间距
     
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('Color Tool')  
-        self.setFixedSize(800, 600)
+        self.setWindowTitle('Color Tool for xiangw')  
+        self.setFixedSize(804, 520)
         qfile = QFile("newform.ui")
         qfile.open(QFile.ReadOnly)
         qfile.close()
@@ -56,11 +50,13 @@ class Window(QMainWindow):
         self.colortool = ColorTool()
         
         self.imgs = []
+        self.blockspos = []
         
     def init_connect(self):
         # 信号与槽函数连接
         self.widget.loadBtn.clicked.connect(self.loadimg) # 传入一个self
         self.widget.startBtn.clicked.connect(self.start)
+        self.widget.saveBtn.clicked.connect(self.saveimgs)
         self.widget.colorNum.valueChanged.connect(self.colornumset)
         self.widget.colorType.currentTextChanged.connect(self.colortypeset)
     
@@ -89,12 +85,9 @@ class Window(QMainWindow):
         self.widget.imgShow.fitInView(item, Qt.KeepAspectRatio)
         
     def start(self):
-        # self.colortool.kmeanscore()
+        self.colortool.kmeanscore()
         self.refresh()
         self.list2imgs(self.colortool.color_list)
-        
-        # 保存测试
-        # self.saveimgs()
         
         self.widget.update()
     
@@ -110,12 +103,14 @@ class Window(QMainWindow):
                 pass
           
     def paintEvent(self, event):
-        qp = QPainter(self)
         for i in range(len(self.imgs)):
+            qp = QPainter(self)
             block = QImage(self.imgs[i], self.BLOCK_W, self.BLOCK_H, self.BLOCK_W*3, QImage.Format_RGB888)
-            qp.drawImage(self.BLOCKS_X, self.BLOCKS_Y+i*self.BLOCK_D, block)
-            
-        qp.end()
+            if i<8:
+                qp.drawImage(self.BLOCKS_X, self.BLOCKS_Y+i*self.BLOCK_HD, block)    
+            else:
+                qp.drawImage(self.BLOCKS_X+self.BLOCK_VD, self.BLOCKS_Y+(i-8)*self.BLOCK_HD, block)
+            qp.end()
 
     
     def list2imgs(self, colorlist):

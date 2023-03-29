@@ -25,17 +25,18 @@ class ColorTool():
         self.rgb_list = None
     
     def updatedata(self):
-        Rchannel = self.ori_pic[:, :, 0]
-        Gchannel = self.ori_pic[:, :, 1]
-        Bchannel = self.ori_pic[:, :, 2]
+        Rchannel = self.ori_pic[:, :, 0].flatten()
+        Gchannel = self.ori_pic[:, :, 1].flatten()
+        Bchannel = self.ori_pic[:, :, 2].flatten()
         
         self.rgb_list = np.vstack((Rchannel, Gchannel, Bchannel), dtype=np.double)
+        print("rgblist: ", self.rgb_list)
     
     def kmeanscore(self):
         self.updatedata()
         
-        kmeans = KMeans(n_clusters=self.color_num, init='k-means++', max_iter=1000, n_init=10)
-        kmeans.fit(self.rgb_list)
+        kmeans = KMeans(n_clusters=self.color_num, max_iter=300, verbose=1, algorithm='auto')
+        kmeans.fit(self.rgb_list.T)
         C = kmeans.cluster_centers_
         
         # 以下为聚类结束后的重排序，依据RGB矩阵均值最大列为正权重
@@ -44,13 +45,13 @@ class ColorTool():
         C = np.round(C)
         cmean = np.mean(C, axis=0)
         cindex = np.argsort(cmean)[::-1]
-        coe = np.zeros((3,1))
+        coe = np.zeros(3)
         coe[cindex[0]] = 1
         coe[cindex[1]] = -0.4
         coe[cindex[2]] = -0.6
         index = np.argsort(np.dot(C, coe))[::-1]
-        C = C[index,:]
-
-        self.color_list = C
+        C = C[index]
+        
+        self.color_list = C.astype(int)
 # if __name__ == "__main__":
 #     pass
