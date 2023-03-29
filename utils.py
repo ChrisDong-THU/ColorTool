@@ -10,7 +10,7 @@ class ColorTool():
         self.color_num = 2
         # 色卡数量
         self.color_list = np.array([
-            [189, 115, 138],
+            [0, 0, 255],
             [237, 173, 158],
             [140, 199, 181],
             [120, 205, 205],
@@ -32,6 +32,8 @@ class ColorTool():
         self.rgb_list = np.vstack((Rchannel, Gchannel, Bchannel), dtype=np.double)
     
     def kmeanscore(self):
+        self.updatedata()
+        
         kmeans = KMeans(n_clusters=self.color_num, init='k-means++', max_iter=1000, n_init=10)
         kmeans.fit(self.rgb_list)
         C = kmeans.cluster_centers_
