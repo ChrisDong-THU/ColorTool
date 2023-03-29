@@ -6,16 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>761</width>
-    <height>546</height>
+    <width>804</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QWidget" name="widget_7" native="true">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <widget class="QWidget" name="widget" native="true">
       <property name="geometry">
        <rect>
@@ -24,6 +30,9 @@
         <width>457</width>
         <height>131</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(245, 245, 245);</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -35,28 +44,28 @@
              <string notr="true">font: 10pt &quot;更纱黑体 UI SC&quot;;</string>
             </property>
             <property name="text">
-             <string>颜色模式</string>
+             <string>排序模式</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QComboBox" name="colorType">
             <property name="styleSheet">
-             <string notr="true">font: 9pt &quot;Source Code Pro&quot;;</string>
+             <string notr="true">font: 9pt &quot;更纱黑体 UI SC&quot;;</string>
             </property>
             <item>
              <property name="text">
-              <string>RGB</string>
+              <string>亮度</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>#hex</string>
+              <string>权重</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>HSV</string>
+              <string>平均</string>
              </property>
             </item>
            </widget>
@@ -112,27 +121,6 @@
          </layout>
         </widget>
        </item>
-       <item row="0" column="2">
-        <widget class="QWidget" name="widget_8" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_5"/>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QWidget" name="widget_3" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QPushButton" name="loadBtn">
-            <property name="styleSheet">
-             <string notr="true">font: 9pt &quot;更纱黑体 UI SC&quot;;</string>
-            </property>
-            <property name="text">
-             <string>打开</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
        <item row="1" column="1">
         <widget class="QWidget" name="widget_6" native="true">
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -149,16 +137,60 @@
          </layout>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QWidget" name="widget_8" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QPushButton" name="editBtn">
+            <property name="styleSheet">
+             <string notr="true">font: 9pt &quot;更纱黑体 UI SC&quot;;</string>
+            </property>
+            <property name="text">
+             <string>格式</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QWidget" name="widget_3" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="loadBtn">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>19</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 9pt &quot;更纱黑体 UI SC&quot;;</string>
+            </property>
+            <property name="text">
+             <string>打开</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QGraphicsView" name="imgShow">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>451</width>
-        <height>331</height>
+        <width>457</width>
+        <height>340</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: transparent;border:0px</string>
       </property>
      </widget>
     </widget>
