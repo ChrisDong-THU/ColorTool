@@ -29,7 +29,8 @@ class ColorTool():
         Gchannel = self.ori_pic[:, :, 1].flatten()
         Bchannel = self.ori_pic[:, :, 2].flatten()
         
-        self.rgb_list = np.vstack((Rchannel, Gchannel, Bchannel), dtype=np.double)
+        self.rgb_list = np.vstack((Rchannel, Gchannel, Bchannel))
+        self.rgb_list = self.rgb_list.astype(np.double)
         print("rgblist: ", self.rgb_list)
     
     def kmeanscore(self):
