@@ -15,7 +15,7 @@ from PySide2.QtUiTools import QUiLoader
 from PySide2 import QtCore
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QFileDialog
-from PySide2.QtGui import QPixmap, QImage
+from PySide2.QtGui import QPixmap, QImage, QIcon
 from PySide2.QtGui import QPainter
 
 from utils import ColorTool
@@ -36,6 +36,7 @@ class Window(QMainWindow):
         super().__init__()
         self.setWindowTitle('Color Tool for XiaoW')  
         self.setFixedSize(804, 520)
+        self.setWindowIcon(QIcon("./icons/logo.png"))
         qfile = QFile("newform.ui")
         qfile.open(QFile.ReadOnly)
         qfile.close()
