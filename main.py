@@ -140,7 +140,7 @@ class Window(QMainWindow):
             cpath = os.path.join(path, k)
             os.remove(cpath)
         
-        # TODO: 将图片连成一排打印出来，格式可自定义
+        # 将图片连成一排打印出来，格式可自定义
         colorlist = self.colortool.color_list
         [h, w, span] = self.editreal
         singleimg = np.zeros((h, w, 3), np.uint8)
